@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+install -Dm755 kiss-cacheman.sh "$1/usr/bin/kiss-cacheman"
+install -Dm755 kiss-find.sh "$1/usr/bin/kiss-find"
+install -Dm755 kiss-rmdeps.sh "$1/usr/bin/kiss-rmdeps"

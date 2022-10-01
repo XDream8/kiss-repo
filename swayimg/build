@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+kiss l libwebp >/dev/null 2>/dev/null && webp=enabled || webp=disabled
+kiss l giflib >/dev/null 2>/dev/null && giflib=enabled || giflib=disabled
+
+meson \
+    --auto-features=auto \
+	--prefix=/usr \
+    -Djpeg=enabled \
+    -Dpng=enabled \
+    -Dwebp=$webp \
+    -Dgif=$giflib \
+    . output
+
+ninja -C output
+ninja -C output install

@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+install -Dm755 fm6000.pl "$1/usr/bin/fm6000"

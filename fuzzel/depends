@@ -1,0 +1,9 @@
+fcft
+fontconfig
+libpng
+libxkbcommon
+meson             make
+pixman
+tllist
+wayland
+wayland-protocols make

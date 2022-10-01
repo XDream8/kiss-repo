@@ -1,0 +1,6 @@
+libffi            make
+libpng
+libjpeg-turbo
+json-c
+wayland
+wayland-protocols make
