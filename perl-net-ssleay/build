@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-PERL_MM_USE_DEFAULT=1 perl Makefile.PL INSTALLDIRS=vendor
-make
-make DESTDIR="$1" install
