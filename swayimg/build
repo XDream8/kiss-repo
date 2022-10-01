@@ -7,7 +7,7 @@ kiss l giflib >/dev/null 2>/dev/null && giflib=enabled || giflib=disabled
 
 meson \
     --auto-features=auto \
-	--prefix=/usr \
+    --prefix=/usr \
     -Djpeg=enabled \
     -Dpng=enabled \
     -Dwebp=$webp \

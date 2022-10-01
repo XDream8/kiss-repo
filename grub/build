@@ -43,7 +43,7 @@ build_grub() (
         --sysconfdir=/etc \
         --disable-werror \
         --disable-nls \
-		--disable-grub-mkfont \
+        --disable-grub-mkfont \
         --disable-grub-mount \
         "$@"
 

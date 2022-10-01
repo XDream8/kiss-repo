@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 rm -f gtk-doc.make
-cat > gtk-doc.make <<EOF
+cat >gtk-doc.make <<EOF
 EXTRA_DIST =
 CLEANFILES =
 EOF

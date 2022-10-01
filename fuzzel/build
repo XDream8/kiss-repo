@@ -1,13 +1,13 @@
 #!/bin/sh -e
 
 export DESTDIR="$1"
-
+hello
 ## no scdoc dep
-sed '/subdir(.doc.)/d' meson.build > _
+sed '/subdir(.doc.)/d' meson.build >_
 mv -f _ meson.build
 
 meson \
-	--prefix=/usr \
+    --prefix=/usr \
     -Denable-cairo=disabled \
     -Dpng-backend=libpng \
     -Dsvg-backend=none \
