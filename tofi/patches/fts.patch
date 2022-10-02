@@ -1,0 +1,10 @@
+--- meson.build.orig
++++ meson.build
+@@ -101,6 +101,7 @@
+   'src/entry_backend/pango.c',
+   'src/entry_backend/harfbuzz.c',
+   'src/fuzzy_match.c',
++  'src/fts/fts.c',
+   'src/history.c',
+   'src/log.c',
+   'src/mkdirp.c',
