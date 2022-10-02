@@ -1,5 +1,5 @@
---- meson.build.orig
-+++ meson.build
+--- a/meson.build
++++ b/meson.build
 @@ -101,6 +101,7 @@
    'src/entry_backend/pango.c',
    'src/entry_backend/harfbuzz.c',
