@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+install -Dm755 scripts/checkbashisms.pl "$1/usr/bin/checkbashisms"
+install -Dm644 scripts/checkbashisms.1 "$1/usr/share/man/man1/checkbashisms.1"
