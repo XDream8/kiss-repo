@@ -1,6 +1,22 @@
 #!/bin/sh -e
 
-for dir in bin lib conf include jmods; do
-    mkdir -p $1/usr/$dir
-  cp -rv $dir $1/usr/
+jdk_dir="usr/lib/java/jdk"
+install_dir="$1/$jdk_dir"
+
+mkdir -p "$install_dir"
+cp -rv bin lib include "$install_dir"
+
+# create the launch scripts
+mkdir -p "$1/usr/bin"
+
+for prog in "$install_dir"/bin/*; do
+	prog="${prog##*/}"
+	cat << EOF > "$1/usr/bin/$prog"
+#!/bin/sh
+
+/$jdk_dir/bin/$prog "\$@"
+EOF
+
+	# make script executable
+	chmod +x "$1/usr/bin/$prog"
 done
