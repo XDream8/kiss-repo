@@ -1,0 +1,20 @@
+#!/bin/sh -e
+
+sh build.sh
+
+./bin/nim compile koch
+./koch boot -d:nimUseLinenoise -d:release
+./koch tools
+
+./koch install "$1/usr/lib"
+
+mkdir -p "$1/usr/bin"
+
+ln -sf /usr/lib/nim/bin/nim "$1/usr/bin/nim"
+
+for prog in bin/*; do
+	prog_name="${prog##*/}"
+	[ "$prog_name" = "nim" ] && continue
+	install -Dm755 "$prog" "$1/usr/lib/nim/bin/$prog_name"
+	ln -sf "/usr/lib/nim/bin/$prog_name" "$1/usr/bin/$prog_name"
+done
