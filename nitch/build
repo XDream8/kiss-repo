@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+cd src
+nim c nitch.nim
+install -Dm755 nitch "$1/usr/bin/nitch"
