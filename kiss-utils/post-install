@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+cat <<EOF
+
+!! IMPORTANT !!
+
+add packages that you don't want to see
+as an orphaned package to /etc/kiss-base
+then you can use kiss-rmorphans as you want
+
+EOF

@@ -17,7 +17,7 @@ fi;
 prompt="${col1}->${col0}";
 
 indir="$KISS_ROOT/var/db/kiss/installed";
-chdir="$HOME/.cache/kiss";
+chdir="${XDG_CACHE_HOME:-$HOME/.cache/kiss}";
 
 # Exit with failure
 abort() {

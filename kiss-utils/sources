@@ -1,3 +1,5 @@
 files/kiss-cacheman.sh
 files/kiss-find.sh
 files/kiss-rmdeps.sh
+files/kiss-genpkg.sh
+files/kiss-rmorphans.sh

@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
-install -Dm755 kiss-cacheman.sh "$1/usr/bin/kiss-cacheman"
-install -Dm755 kiss-find.sh "$1/usr/bin/kiss-find"
-install -Dm755 kiss-rmdeps.sh "$1/usr/bin/kiss-rmdeps"
+for util in *.sh; do
+	install -Dm755 "$util" "$1/usr/bin/${util%%.sh}"
+done
+
+## create the kiss-base file
+mkdir -p "$1/etc"
+touch "$1/etc/kiss-base"
