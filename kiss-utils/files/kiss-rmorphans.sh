@@ -12,12 +12,12 @@ select=0
 
 world() {
 	pac="$1"
-	kiss l $pac >/dev/null 2>/dev/null || {
+	kiss l "$pac" >/dev/null 2>/dev/null || {
 		printf '%s\n' "$pac is not installed"
 		return 1
 	}
 	## check if it is in world
-	if grep -qx "$pac" "$world_file" 2>/dev/null ]; then
+	if grep -qx "$pac" "$world_file" 2>/dev/null; then
 		$SUDO sed -i "/^$pac$/d" "$world_file"
 		printf '%s\n' "$pac removed from world"
 	else
