@@ -1,20 +1,42 @@
 #!/bin/sh -e
 # List real orphaned packages by reading base packages from a file
 
+SUDO="${KISS_SU:-doas}"
 world_file="${KISS_WORLD:-/etc/kiss-base}"
 
 n='
 '
 
 remove=0
+select=0
+
+world() {
+	pac="$1"
+	kiss l $pac >/dev/null 2>/dev/null || {
+		printf '%s\n' "$pac is not installed"
+		return 1
+	}
+	## check if it is in world
+	if grep -qx "$pac" "$world_file" 2>/dev/null ]; then
+		$SUDO sed -i "/^$pac$/d" "$world_file"
+		printf '%s\n' "$pac removed from world"
+	else
+		printf '%s\n' "$pac" | $SUDO tee -a "$world_file"
+		printf '%s\n' "$pac added to world"
+		$SUDO sort "$world_file" -o "$world_file"
+	fi
+	## delete empty lines
+	$SUDO sed -i '/^$/d' "$world_file"
+}
 
 help() {
-	printf '%s\n' "--- $(basename $0) ---
+	printf '%s\n\n' "--- $(basename "$0") ---
 Usage: $0 <option>
 
-  -h, --help		Shows this help page
-  -r, --remove		Remove orphans
-	"
+  -h, --help        Shows this help page
+  -r, --remove      Remove orphans
+
+  -s, --select      Add/Remove from /etc/kiss-base"
 	exit 0
 }
 
@@ -23,6 +45,9 @@ case "$1" in
 
 -h | --help)
 	help
+	;;
+-s | --select)
+	select=1
 	;;
 -r | --remove)
 	remove=1
@@ -33,6 +58,20 @@ case "$1" in
 	help
 	;;
 esac
+
+if [ "$select" -eq 1 ]; then
+	for pac in "$@"; do
+		case "$pac" in
+			-h | --help | -r | --remove | -s | --select | "")
+				;;
+			*)
+				world "$pac"
+				;;
+		esac
+	done
+	set --
+	exit 0
+fi
 
 cd "$KISS_ROOT/var/db/kiss/installed"
 set -- *
