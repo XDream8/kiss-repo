@@ -6,11 +6,14 @@ world_file="${KISS_WORLD:-/etc/kiss-base}"
 n='
 '
 
+remove=0
+
 help() {
-	printf '%s\n' "--- kiss-realorphans ---
+	printf '%s\n' "--- $(basename $0) ---
 Usage: $0 <option>
 
   -h, --help		Shows this help page
+  -r, --remove		Remove orphans
 	"
 	exit 0
 }
@@ -20,6 +23,9 @@ case "$1" in
 
 -h | --help)
 	help
+	;;
+-r | --remove)
+	remove=1
 	;;
 "") ;;
 
@@ -44,8 +50,7 @@ l=$n$(
 			sed s,.\*/depends:,,
 
 			# Exclude packages which are not really orphans.
-			printf '%s\n' baseinit baselayout busybox bzip2 e2fsprogs gcc \
-				git grub kiss make musl "$(cat "$world_file" 2>/dev/null)"
+			xargs printf '%s\n' baseinit baselayout busybox bzip2 e2fsprogs gcc git grub kiss make musl <"$world_file"
 		} |
 
 		# Remove duplicates.
@@ -63,10 +68,13 @@ for pkg; do
 	set -- "$@" "$pkg"
 done
 
-if [ ! "$*" = "" ]; then
-	pacs="$(printf '%s\n' "$@" | tr "\n" " " | sed 's/ $//')"
+if [ "$*" ]; then
 	printf '%s\n' "$@"
-	[ "$(command -v kiss-rmdeps)" ] && kiss rmdeps "$pacs" || printf '\n%s\n' "kiss remove $pacs"
+	if [ "$remove" -eq 1 ]; then
+		[ "$(command -v kiss-rmdeps)" ] && kiss-rmdeps "$@" 2>/dev/null ||
+			# this is when kiss-rmdeps is not available
+			printf '\n%s\n' "kiss remove $*"
+	fi
 else
 	printf '%s\n' "no orphan packages found"
 fi
