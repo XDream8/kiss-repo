@@ -14,14 +14,14 @@ world() {
 	pac="$1"
 	kiss l "$pac" >/dev/null 2>/dev/null || {
 		printf '%s\n' "$pac is not installed"
-		return 1
+		return
 	}
 	## check if it is in world
-	if grep -qx "$pac" "$world_file" 2>/dev/null; then
+	if grep -qx "$pac" "$world_file"; then
 		$SUDO sed -i "/^$pac$/d" "$world_file"
 		printf '%s\n' "$pac removed from world"
 	else
-		printf '%s\n' "$pac" | $SUDO tee -a "$world_file"
+		$SUDO sed -i "\$a$pac" "$world_file"
 		printf '%s\n' "$pac added to world"
 		$SUDO sort "$world_file" -o "$world_file"
 	fi
