@@ -62,11 +62,11 @@ esac
 if [ "$select" -eq 1 ]; then
 	for pac in "$@"; do
 		case "$pac" in
-			-h | --help | -r | --remove | -s | --select | "")
-				;;
-			*)
-				world "$pac"
-				;;
+		-h | --help | -r | --remove | -s | --select | "") ;;
+
+		*)
+			world "$pac"
+			;;
 		esac
 	done
 	set --
