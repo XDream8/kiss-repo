@@ -1,22 +1,26 @@
 #!/usr/bin/sh -e
+# Generate binary packages
 
-[ -z $1 ] && echo "Provide a package name" && exit 1
-pkg=$1
-path=$(kiss search $pkg)
-rm -rf $pkg
+[ -z "$1" ] && printf '%s\n' "Provide a package name" && exit 1
+pkg="$1"
+path="$(kiss search "$pkg" | awk 'FNR==1 {print $1}')"
+rm -rf "$pkg"
 
-mkdir $pkg
-cd $pkg
-cp $path/version .
-cp $path/depends .
-sed -i '/.* make$/d' ./depends
+mkdir "$pkg"
+cd "$pkg"
+cp "$path/version" .
+cp "$path/depends" .
+sed -i '/.* make$/d' depends
 
-echo "cp * /" > ./build
-chmod +x ./build
+cat << EOF > build
+#!/bin/sh -e
 
-version=$(sed 's/ /-/g' ./version)
-echo "https://github.com/XDream8/kiss-bin/archive/${pkg}@${version}.tar.xz" \
-  > ./sources
+cp * /
+EOF
+chmod +x build
+
+version="$(sed 's/ /-/g' ./version)"
+printf '%s\n' "https://github.com/XDream8/kiss-bin/archive/${pkg}@${version}.tar.xz" > sources
 
 kiss c
 
