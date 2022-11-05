@@ -6,5 +6,5 @@
    'src/fuzzy_match.c',
 +  'src/fts/fts.c',
    'src/history.c',
-   'src/log.c',
-   'src/mkdirp.c',
+   'src/input.c',
+   'src/lock.c',

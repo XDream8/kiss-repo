@@ -4,3 +4,4 @@ glib
 libxkbcommon
 pango
 wayland
+wayland-protocols make
