@@ -3,7 +3,6 @@
 ## unique packages
 * [chafa](chafa/)
 * [fuzzel](fuzzel/) **wayland launcher without cairo dependency**
-* [f2fs-tools](f2fs-tools/) **for f2fs filesystem support**
 * [grub](grub/) **msdos only build**
 * [kiss-utils](kiss-utils/) **utils: kiss-rmdeps, kiss-cacheman, kiss-genpkg, kiss-find, kiss-rmorphans**
 * [mesa](mesa/) **intel only, no llvm dep**
