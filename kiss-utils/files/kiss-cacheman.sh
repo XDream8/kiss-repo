@@ -17,7 +17,7 @@ fi;
 prompt="${col1}->${col0}";
 
 indir="$KISS_ROOT/var/db/kiss/installed";
-chdir="${XDG_CACHE_HOME:-$HOME/.cache/kiss}";
+[ -n "$XDG_CACHE_HOME" ] && chdir="$XDG_CACHE_HOME/kiss" || chdir="$HOME/.cache/kiss"
 
 # Exit with failure
 abort() {
@@ -70,7 +70,7 @@ clean() {
   echo "${prompt} Found: ${col2}$1${col0}";
   [ "$reallydelete" = "yes" ] && {
     # Make sure we don't ruin stuff out of $chdir by mistake
-    [ "$1" = "$chdir/${1##$chdir/}" ] && rm -rf "$1";
+    [ "$1" = "$chdir/${1##"$chdir"/}" ] && rm -rf "$1";
   } || :;
 }
 
