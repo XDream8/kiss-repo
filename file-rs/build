@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+cargo build \
+    --profile optimized \
+    --locked
+
+install -Dm755 target/optimized/file-rs "$1/usr/bin/file-rs"
