@@ -1,5 +1,0 @@
-autoconf make
-automake conf
-libtool make
-glib make
-freetype-harfbuzz
