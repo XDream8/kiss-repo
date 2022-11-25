@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 cargo build \
-    --profile optimized
+	--profile optimized \
+	--locked
 
 install -Dm755 target/optimized/hc-rs "$1/usr/bin/hc-rs"
