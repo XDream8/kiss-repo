@@ -3,24 +3,26 @@
 
 SUDO="${KISS_SU:-doas}"
 world_file="${KISS_WORLD:-/etc/kiss-base}"
+db="/var/db/kiss/installed"
 
 n='
 '
 
 remove=0
 select=0
+check=0
 
 world() {
 	pac="$1"
-	kiss l "$pac" >/dev/null 2>/dev/null || {
-		printf '%s\n' "$pac is not installed"
-		return
-	}
 	## check if it is in world
 	if grep -qx "$pac" "$world_file"; then
 		$SUDO sed -i "/^$pac$/d" "$world_file"
 		printf '%s\n' "$pac removed from world"
 	else
+		[ -d "$db/$pac" ] || {
+			printf '%s\n' "$pac is not installed"
+			return
+		}
 		$SUDO sed -i "\$a$pac" "$world_file"
 		printf '%s\n' "$pac added to world"
 		$SUDO sort "$world_file" -o "$world_file"
@@ -35,8 +37,9 @@ Usage: $0 <option>
 
   -h, --help        Shows this help page
   -r, --remove      Remove orphans
+  -c, --check       Check world file ($world_file)
 
-  -s, --select      Add/Remove from /etc/kiss-base"
+  -s, --select      Add/Remove from $world_file"
 	exit 0
 }
 
@@ -51,6 +54,9 @@ case "$1" in
 	;;
 -r | --remove)
 	remove=1
+	;;
+-c | --check)
+	check=1
 	;;
 "") ;;
 
@@ -70,6 +76,16 @@ if [ "$select" -eq 1 ]; then
 		esac
 	done
 	set --
+	exit 0
+fi
+
+if [ "$check" -eq 1 ]; then
+	while read -r PAC; do
+		[ -d "$db/$PAC" ] || {
+			printf '%s\n' "$PAC seems to be not installed"
+			world "$PAC"
+		}
+	done <"$world_file"
 	exit 0
 fi
 
