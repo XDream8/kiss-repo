@@ -1,0 +1,43 @@
+#!/bin/sh -e
+# shellcheck disable=2016,2086
+
+patch -p1 <syslinux-sysmacros.patch
+
+{
+	# Do not try to build the Windows or DOS installers and DIAG files
+	sed 's|diag libinstaller dos win32 win64 dosutil txt|libinstaller txt|g' -i Makefile
+	sed 's|win32/syslinux.exe win64/syslinux64.exe||g' -i Makefile
+	sed 's|dosutil/\*.com dosutil/\*.sys||g' -i Makefile
+	sed 's|dos/syslinux.com||g' -i Makefile
+	sed 's|INSTALLSUBDIRS = com32 utils dosutil|INSTALLSUBDIRS = com32 utils|g' -i Makefile
+	sed 's|install -m 644 -c $(INSTALL_DIAG) $(INSTALLROOT)$(DIAGDIR)|# install -m 644 -c $(INSTALL_DIAG) $(INSTALLROOT)$(DIAGDIR)|g' -i Makefile
+	# Fix FHS manpage path
+	sed 's|/usr/man|/usr/share/man|g' -i mk/syslinux.mk
+	sed '/GCCOPT += $(call gcc_ok,-fPIC)/i GCCOPT += $(call gcc_ok,-fcommon)' -i mk/lib.mk
+
+	SYSLINUX_MAKEFILES="extlinux/Makefile linux/Makefile mtools/Makefile sample/Makefile utils/Makefile"
+	for makefile in $SYSLINUX_MAKEFILES; do
+		### respect LDFLAGS
+		sed -i $makefile -e '/^LDFLAGS/d'
+		### respect CFLAGS
+		sed -i $makefile \
+			-e 's|-g -Os||g' \
+			-e 's|-Os||g' \
+			-e 's|CFLAGS[[:space:]]\+=|CFLAGS +=|g'
+	done
+}
+
+# disable debug and development flags to reduce bootloader size
+truncate -s 0 mk/devel.mk
+
+case "$XBPS_TARGET_MACHINE" in
+i686*) targets="bios efi32" ;;
+x86_64*) targets="bios efi64" ;;
+esac
+
+make $targets installer
+
+make INSTALLROOT="$1" install SBINDIR=/usr/bin AUXDIR=/usr/lib/syslinux
+
+# Remove completely development stuff.
+rm -rf "$1"/usr/lib/syslinux/com32/include "$1"/usr/lib/syslinux/com32/*.a

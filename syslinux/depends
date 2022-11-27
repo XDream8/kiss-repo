@@ -1,0 +1,4 @@
+nasm   make
+perl   make
+python make
+util-linux
