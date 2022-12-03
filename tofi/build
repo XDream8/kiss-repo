@@ -1,16 +1,16 @@
 #!/bin/sh -e
 
 # musl-fts fix
-cat <<EOF > src/fts/config.h
+cat <<EOF >src/fts/config.h
 #define HAVE_DECL_MAX 1
 #define HAVE_DECL_UINTMAX_MAX 0
 #define HAVE_DIRFD 1
 EOF
 
 ## patch for musl-fts
-patch -p1 < fts.patch
+patch -p1 <fts.patch
 
-meson \
+meson setup \
 	--prefix=/usr \
 	-Dman-pages=disabled \
 	. output
