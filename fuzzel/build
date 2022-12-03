@@ -18,4 +18,5 @@ ninja -C output install
 
 ## remove unneded
 rm -rf "$1/usr/share/zsh/" \
+	"$1/usr/share/fish" \
 	"$1/usr/share/doc"
