@@ -12,6 +12,10 @@ remove=0
 select=0
 check=0
 
+if [ ! -f "$world_file" ]; then
+    $SUDO touch $world_file
+fi
+
 world() {
 	pac="$1"
 	## check if it is in world
@@ -23,7 +27,7 @@ world() {
 			printf '%s\n' "$pac is not installed"
 			return
 		}
-		$SUDO sed -i "\$a$pac" "$world_file"
+		$SUDO sh -c "printf '%s\n' $pac >> $world_file"
 		printf '%s\n' "$pac added to world"
 		$SUDO sort "$world_file" -o "$world_file"
 	fi
@@ -105,7 +109,7 @@ l=$n$(
 			sed s,.\*/depends:,,
 
 			# Exclude packages which are not really orphans.
-			xargs printf '%s\n' baseinit baselayout busybox bzip2 e2fsprogs gcc git grub kiss make musl <"$world_file"
+			xargs printf '%s\n' baseinit baselayout busybox bzip2 e2fsprogs f2fs-tools gcc git grub syslinux kiss make musl <"$world_file"
 		} |
 
 		# Remove duplicates.

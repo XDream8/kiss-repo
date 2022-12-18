@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+mkdir -pv "$1/usr"
+cp -rv bin lib share "$1/usr/"

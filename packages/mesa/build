@@ -5,7 +5,7 @@
 # and enables it if present. ie: install glvnd, rebuild mesa.
 pkg-config --exists libglvnd || glvnd_enabled=false
 
-meson \
+meson setup \
     --prefix=/usr \
     --sysconfdir=/etc \
     --mandir=/usr/share/man \
