@@ -8,4 +8,11 @@ add packages that you don't want to see
 as an orphaned package to /etc/kiss-base
 then you can use kiss-rmorphans as you want
 
+to use hooks add these to your .profile(.bash_profile, .zprofile, .yash_profile, etc):
+
+export KISS_HOOK="\\
+    /usr/lib/kiss-hooks/kiss-timer-hook:\\
+    /usr/lib/kiss-hooks/kiss-mangz-hook:\\
+    /usr/lib/kiss-hooks/kiss-rminfo-hook"
+
 EOF
