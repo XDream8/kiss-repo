@@ -1,0 +1,26 @@
+#!/bin/sh -e
+
+# musl-fts fix
+cat <<EOF >src/fts/config.h
+#define HAVE_DECL_MAX 1
+#define HAVE_DECL_UINTMAX_MAX 0
+#define HAVE_DIRFD 1
+EOF
+
+## fix for musl-fts
+sed \
+    -e "s#'src/fuzzy_match.c',#'src/fuzzy_match.c',\n    'src/fts/fts.c',#" \
+    -e 's/, libfts//' \
+    -e '/libfts = .*)/d' \
+    meson.build >_
+mv -f _ meson.build
+
+meson setup \
+    --prefix=/usr \
+    -Dman-pages=disabled \
+    . output
+
+cp src/fts/fts.h output/
+
+ninja -C output
+ninja -C output install
