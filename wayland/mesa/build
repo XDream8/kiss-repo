@@ -17,7 +17,7 @@ meson setup \
     -Degl=enabled \
     -Dllvm=disabled \
     -Dshared-llvm=disabled \
-    -Dgallium-drivers='iris' \
+    -Dgallium-drivers='crocus,iris,i915' \
     -Dvalgrind=false \
     -Dzstd=disabled \
     -Dglvnd="${glvnd_enabled:-true}" \
