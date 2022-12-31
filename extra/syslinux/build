@@ -4,27 +4,27 @@
 patch -p1 <syslinux-sysmacros.patch
 
 {
-	# Do not try to build the Windows or DOS installers and DIAG files
-	sed 's|diag libinstaller dos win32 win64 dosutil txt|libinstaller txt|g' -i Makefile
-	sed 's|win32/syslinux.exe win64/syslinux64.exe||g' -i Makefile
-	sed 's|dosutil/\*.com dosutil/\*.sys||g' -i Makefile
-	sed 's|dos/syslinux.com||g' -i Makefile
-	sed 's|INSTALLSUBDIRS = com32 utils dosutil|INSTALLSUBDIRS = com32 utils|g' -i Makefile
-	sed 's|install -m 644 -c $(INSTALL_DIAG) $(INSTALLROOT)$(DIAGDIR)|# install -m 644 -c $(INSTALL_DIAG) $(INSTALLROOT)$(DIAGDIR)|g' -i Makefile
-	# Fix FHS manpage path
-	sed 's|/usr/man|/usr/share/man|g' -i mk/syslinux.mk
-	sed '/GCCOPT += $(call gcc_ok,-fPIC)/i GCCOPT += $(call gcc_ok,-fcommon)' -i mk/lib.mk
+    # Do not try to build the Windows or DOS installers and DIAG files
+    sed 's|diag libinstaller dos win32 win64 dosutil txt|libinstaller txt|g' -i Makefile
+    sed 's|win32/syslinux.exe win64/syslinux64.exe||g' -i Makefile
+    sed 's|dosutil/\*.com dosutil/\*.sys||g' -i Makefile
+    sed 's|dos/syslinux.com||g' -i Makefile
+    sed 's|INSTALLSUBDIRS = com32 utils dosutil|INSTALLSUBDIRS = com32 utils|g' -i Makefile
+    sed 's|install -m 644 -c $(INSTALL_DIAG) $(INSTALLROOT)$(DIAGDIR)|# install -m 644 -c $(INSTALL_DIAG) $(INSTALLROOT)$(DIAGDIR)|g' -i Makefile
+    # Fix FHS manpage path
+    sed 's|/usr/man|/usr/share/man|g' -i mk/syslinux.mk
+    sed '/GCCOPT += $(call gcc_ok,-fPIC)/i GCCOPT += $(call gcc_ok,-fcommon)' -i mk/lib.mk
 
-	SYSLINUX_MAKEFILES="extlinux/Makefile linux/Makefile mtools/Makefile sample/Makefile utils/Makefile"
-	for makefile in $SYSLINUX_MAKEFILES; do
-		### respect LDFLAGS
-		sed -i $makefile -e '/^LDFLAGS/d'
-		### respect CFLAGS
-		sed -i $makefile \
-			-e 's|-g -Os||g' \
-			-e 's|-Os||g' \
-			-e 's|CFLAGS[[:space:]]\+=|CFLAGS +=|g'
-	done
+    SYSLINUX_MAKEFILES="extlinux/Makefile linux/Makefile mtools/Makefile sample/Makefile utils/Makefile"
+    for makefile in $SYSLINUX_MAKEFILES; do
+        ### respect LDFLAGS
+        sed -i $makefile -e '/^LDFLAGS/d'
+        ### respect CFLAGS
+        sed -i $makefile \
+            -e 's|-g -Os||g' \
+            -e 's|-Os||g' \
+            -e 's|CFLAGS[[:space:]]\+=|CFLAGS +=|g'
+    done
 }
 
 # disable debug and development flags to reduce bootloader size
