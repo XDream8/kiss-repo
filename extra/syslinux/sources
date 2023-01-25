@@ -1,2 +1,2 @@
-https://kernel.org/pub/linux/utils/boot/syslinux/Testing/VERSION/syslinux-VERSION-pre1.tar.xz
+https://kernel.org/pub/linux/utils/boot/syslinux/Testing/MAJOR.MINOR/syslinux-VERSION.tar.xz
 patches/syslinux-sysmacros.patch
