@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-cargo build \
-    --profile optimized \
-    --offline
+cargo build --profile optimized
 
 install -Dm755 target/optimized/file-rs "$1/usr/bin/file-rs"
