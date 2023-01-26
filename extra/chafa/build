@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+rm -f gtk-doc.make
+cat >gtk-doc.make <<EOF
+EXTRA_DIST =
+CLEANFILES =
+EOF
+
+./configure --prefix=/usr
+
+make
+make DESTDIR="$1" install
