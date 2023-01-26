@@ -5,24 +5,24 @@
 # and enables it if present. ie: install glvnd, rebuild mesa.
 pkg-config --exists libglvnd || glvnd_enabled=false
 
-meson setup \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --mandir=/usr/share/man \
-    --localstatedir=/var \
-    --buildtype=release \
-    -Dglx-read-only-text=true \
-    -Dplatforms=wayland \
-    -Dglx=disabled \
-    -Degl=enabled \
-    -Dllvm=disabled \
-    -Dshared-llvm=disabled \
-    -Dgallium-drivers='crocus,iris,i915' \
-    -Dvalgrind=false \
-    -Dzstd=disabled \
-    -Dglvnd="${glvnd_enabled:-true}" \
-    -Dvulkan-drivers='' \
-    . output
+meson \
+	--prefix=/usr \
+	--sysconfdir=/etc \
+	--mandir=/usr/share/man \
+	--localstatedir=/var \
+	--buildtype=release \
+	-Dglx-read-only-text=true \
+	-Dplatforms=wayland \
+	-Dglx=disabled \
+	-Degl=enabled \
+	-Dllvm=disabled \
+	-Dshared-llvm=disabled \
+	-Dgallium-drivers='iris,i915,virgl' \
+	-Dvalgrind=false \
+	-Dzstd=disabled \
+	-Dglvnd="${glvnd_enabled:-true}" \
+	-Dvulkan-drivers='' \
+	. output
 
 ninja -C output
 ninja -C output install
