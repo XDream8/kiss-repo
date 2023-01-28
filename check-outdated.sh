@@ -11,6 +11,7 @@ for repo in ./*; do
 	# shellcheck disable=2295
 	outdated="${outdated#${outdated%%[![:space:]]*}}"
 
-	printf '%s\n' "$repo:"
-	printf '%s\n\n' "$outdated"
+    if [ -n "$outdated" ]; then
+	    printf '%s\n%s\n\n' "$repo:" "$outdated"
+    fi
 done
