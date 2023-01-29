@@ -1,6 +1,9 @@
-libffi            make
-libpng
-libjpeg-turbo
+fontconfig
+freetype-harfbuzz
 json-c
+libffi            make
+libjpeg-turbo
+libpng
+libxkbcommon
 wayland
 wayland-protocols make
