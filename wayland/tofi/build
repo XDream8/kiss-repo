@@ -7,7 +7,6 @@ cat <<EOF >src/fts/config.h
 #define HAVE_DIRFD 1
 EOF
 
-## fix for musl-fts
 sed \
 	-e "s#'src/fuzzy_match.c',#'src/fuzzy_match.c',\n    'src/fts/fts.c',#" \
 	-e 's/, libfts//' \
@@ -15,12 +14,18 @@ sed \
 	meson.build >_
 mv -f _ meson.build
 
+## configure app
 meson \
 	--prefix=/usr \
 	-Dman-pages=disabled \
 	. output
 
+## copy required header file
 cp src/fts/fts.h output/
 
+## build
 ninja -C output
 ninja -C output install
+
+## remove unwanted completion file
+rm -rf "$1/usr/share/bash-completion/"
