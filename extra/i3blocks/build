@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+autoreconf -fi
+
+./configure \
+	--prefix=/usr \
+	--sysconfdir=/etc
+
+make
+make DESTDIR="$1" install
+
+## remove unwanted bash completion
+rm -rf "$1/usr/share/bash-completion/"
