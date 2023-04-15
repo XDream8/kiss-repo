@@ -2,7 +2,7 @@
 
 export LDFLAGS="$LDFLAGS -static"
 
-patch -p1 <f2fs-tools-lz4.patch
+# patch -p1 <f2fs-tools-lz4.patch
 
 autoreconf -fi
 ./configure \
