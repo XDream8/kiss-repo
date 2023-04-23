@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+./configure \
+    --prefix=/usr \
+    --disable-man \
+    --without-su \
+    --disable-nls \
+    --without-selinux \
+    --without-btrfs \
+    --without-libpam \
+    --without-audit \
+    --without-bcrypt \
+    --without-yescrypt \
+    --without-fcaps \
+    --without-nscd \
+    --without-sssd
+
+make
+
+install -Dm755 src/newuidmap "$1/usr/bin/newuidmap"
+install -Dm755 src/newgidmap "$1/usr/bin/newgidmap"

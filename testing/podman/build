@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+sed 's/-sfr/-sf/g' Makefile >_
+mv _ Makefile
+
+make BUILDTAGS="seccomp"
+make install DESTDIR="$1" PREFIX=/usr
+
+## example configs
+mkdir -p "$1/etc/containers"
+cp test/policy.json "$1/etc/containers/policy.json.example"
+cp test/registries.conf "$1/etc/containers/registries.conf.example"
+
+## seccomp
+mkdir -p "$1/usr/share/containers"
+cp vendor/github.com/containers/common/pkg/seccomp/seccomp.json "$1/usr/share/containers/seccomp.json"
+
+## cleanup
+rm -rf "$1/usr/lib/systemd/" \
+	"$1/usr/lib/tmpfiles.d/" \
+	"$1/usr/share/man/man5/podman-systemd.unit.5.gz"

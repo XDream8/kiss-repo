@@ -1,0 +1,15 @@
+btrfs-progs make
+conmon
+git
+glib make
+go make
+gpgme
+iptables
+libassuan make
+libgpg-error make
+libseccomp
+lvm2
+pkgconf make
+runc
+slirp4netns
+uidmap

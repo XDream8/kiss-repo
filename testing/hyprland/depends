@@ -1,0 +1,13 @@
+cairo
+hwdata  make
+libinput
+libseat
+libxkbcommon
+meson   make
+pixman
+pkgconf make
+wayland
+wayland-protocols make
+wlroots make
+# xcb-util-wm
+# xcb-util-renderutil
