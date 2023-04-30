@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+## compilation fails with busybox awk
+#export AWK=/bin/mawk
+
+./configure \
+	--prefix=/usr \
+	--without-x \
+	--with-x-toolkit=no \
+	--without-xft \
+	--without-dbus \
+	--without-gconf \
+	--without-gsettings \
+	--without-xpm \
+	--with-pgtk \
+	--with-modules \
+	--with-gnutls \
+	--with-xml2
+
+make
+make install DESTDIR="$1"
+
+## remove systemd service
+rm -rf "$1/usr/lib/systemd"
