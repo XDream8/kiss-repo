@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+gzip -d rust-analyzer-*
+
+install -Dm755 rust-analyzer-* "$1/usr/bin/rust-analyzer"
