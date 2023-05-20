@@ -5,7 +5,7 @@ export DESTDIR="$1"
 kiss l libwebp >/dev/null 2>/dev/null && webp=enabled || webp=disabled
 kiss l giflib >/dev/null 2>/dev/null && giflib=enabled || giflib=disabled
 
-meson \
+meson setup \
     --auto-features=auto \
     --prefix=/usr \
     -Djpeg=enabled \
