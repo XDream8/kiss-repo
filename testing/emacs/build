@@ -20,5 +20,17 @@
 make
 make install DESTDIR="$1"
 
+mkdir -p "$1/usr/share/emacs/site-lisp"
+cat << EOF > "$1/usr/share/emacs/site-lisp/site-start.el"
+;; Better security defaults
+(with-eval-after-load 'gnutls
+  (setq
+   gnutls-verify-error t
+   gnutls-min-prime-bits 2048
+   gnutls-trustfiles '("/etc/ssl/cert.pem")))
+;; Needed unless KISS Linux gains librsvg support
+(setq-default shr-blocked-images ".*\.svg$")
+EOF
+
 ## remove systemd service
 rm -rf "$1/usr/lib/systemd"
