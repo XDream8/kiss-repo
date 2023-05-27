@@ -1,0 +1,69 @@
+From 7ba760ab76353e9344a08902a5b12acb431d3843 Mon Sep 17 00:00:00 2001
+From: Dmitry Zakharchenko <dmitz@disroot.org>
+Date: Wed, 4 Jan 2023 00:25:55 +0200
+Subject: [PATCH] sticky: sync with 0.4
+
+---
+ config.def.h |  1 +
+ dwl.c        | 15 +++++++++++++--
+ 2 files changed, 14 insertions(+), 2 deletions(-)
+
+diff --git a/config.def.h b/config.def.h
+index a4f7c13d..120c27aa 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -126,6 +126,7 @@ static const Key keys[] = {
+ 	{ MODKEY,                    XKB_KEY_m,          setlayout,      {.v = &layouts[2]} },
+ 	{ MODKEY,                    XKB_KEY_space,      setlayout,      {0} },
+ 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space,      togglefloating, {0} },
++	{ MODKEY,                    XKB_KEY_s,          togglesticky,   {0} },
+ 	{ MODKEY,                    XKB_KEY_e,         togglefullscreen, {0} },
+ 	{ MODKEY,                    XKB_KEY_0,          view,           {.ui = ~0} },
+ 	{ MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_parenright, tag,            {.ui = ~0} },
+diff --git a/dwl.c b/dwl.c
+index 19bb6ce3..ec8c4282 100644
+--- a/dwl.c
++++ b/dwl.c
+@@ -64,7 +64,7 @@
+ #define MAX(A, B)               ((A) > (B) ? (A) : (B))
+ #define MIN(A, B)               ((A) < (B) ? (A) : (B))
+ #define CLEANMASK(mask)         (mask & ~WLR_MODIFIER_CAPS)
+-#define VISIBLEON(C, M)         ((M) && (C)->mon == (M) && ((C)->tags & (M)->tagset[(M)->seltags]))
++#define VISIBLEON(C, M)         ((M) && (C)->mon == (M) && ((C)->tags & (M)->tagset[(M)->seltags] || (C)->issticky))
+ #define LENGTH(X)               (sizeof X / sizeof X[0])
+ #define END(A)                  ((A) + LENGTH(A))
+ #define TAGMASK                 ((1u << TAGCOUNT) - 1)
+@@ -124,7 +124,7 @@ typedef struct {
+ #endif
+ 	unsigned int bw;
+ 	uint32_t tags;
+-	int isfloating, isurgent, isfullscreen;
++	int isfloating, isurgent, isfullscreen, issticky;
+ 	uint32_t resize; /* configure serial of a pending resize */
+ } Client;
+
+@@ -295,6 +295,7 @@ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
+ static void tile(Monitor *m);
+ static void togglefloating(const Arg *arg);
++static void togglesticky(const Arg *arg);
+ static void togglefullscreen(const Arg *arg);
+ static void toggletag(const Arg *arg);
+ static void toggleview(const Arg *arg);
+@@ -2337,6 +2338,16 @@ togglefloating(const Arg *arg)
+ 		setfloating(sel, !sel->isfloating);
+ }
+
++void
++togglesticky(const Arg *arg)
++{
++	Client *sel = focustop(selmon);
++	if (!sel)
++		return;
++	sel->issticky = !sel->issticky;
++	arrange(selmon);
++}
++
+ void
+ togglefullscreen(const Arg *arg)
+ {
