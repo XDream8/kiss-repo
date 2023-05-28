@@ -1,7 +1,0 @@
-#!/bin/sh
-
-delgroup nixbld
-
-for n in $(seq 1 10); do
-    deluser "nixbld$n"
-done

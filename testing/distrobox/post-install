@@ -1,9 +1,0 @@
-#!/bin/sh -e
-
-cat <<EOF
-
-!! IMPORTANT !!
-
-you must install docker or podman to use distrobox
-
-EOF

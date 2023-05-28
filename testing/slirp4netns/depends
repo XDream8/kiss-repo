@@ -1,6 +1,0 @@
-autoconf make
-automake make
-glib
-libcap make
-libseccomp
-libslirp

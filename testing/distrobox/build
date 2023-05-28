@@ -1,7 +1,0 @@
-#!/bin/sh -e
-
-sh ./install --prefix "$1"/usr
-
-rm -rf \
-	"$1/usr/share/bash-completion/" \
-	"$1/usr/share/icons/"
