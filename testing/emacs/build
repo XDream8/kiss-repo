@@ -6,22 +6,27 @@
 ./configure \
 	--prefix=/usr \
 	--without-x \
-	--with-x-toolkit=no \
 	--without-xft \
 	--without-dbus \
 	--without-gconf \
 	--without-gsettings \
 	--without-xpm \
+	--without-zlib \
+	--without-libsystemd \
+    --without-rsvg \
+	--without-sqlite3 \
+	--with-small-ja-dic \
 	--with-pgtk \
 	--with-modules \
 	--with-gnutls \
-	--with-xml2
+	--with-xml2 \
+	--with-json
 
 make
 make install DESTDIR="$1"
 
 mkdir -p "$1/usr/share/emacs/site-lisp"
-cat << EOF > "$1/usr/share/emacs/site-lisp/site-start.el"
+cat <<EOF >"$1/usr/share/emacs/site-lisp/site-start.el"
 ;; Better security defaults
 (with-eval-after-load 'gnutls
   (setq

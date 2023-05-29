@@ -7,12 +7,11 @@ glib
 gmp
 gnutls
 gtk+3
+libjansson
 libjpeg-turbo
 libpng
 libwebp
 libxml2
 ncurses
 pango
-sqlite
 wayland
-zlib
