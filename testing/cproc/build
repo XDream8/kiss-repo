@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+mk() {
+    cd "$1"
+    make
+    make PREFIX=/usr install
+    cd ..
+}
+
+
+mk qbe
+
+PATH="../qbe:$PATH" mk cproc
