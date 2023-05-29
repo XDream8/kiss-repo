@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+cargo build --profile release --locked
+
+install -Dm755 target/release/pfetch "$1/usr/bin/pfetch"
