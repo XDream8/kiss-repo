@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+## debug build - compiles fast
+
+cargo build
+
+install -Dm755 "target/debug/kiss" "$1/usr/bin/kiss"
