@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+cat <<EOF
+
+!! IMPORTANT !!
+
+To start using shinit, edit
+/etc/rc.d/shinit-launch-services.boot
+And uncomment the getty function, and
+Optionally uncomment the runit function
+If you deem necessary.
+
+shinit is installed as /usr/bin/shinit. It
+can fully replace busybox init by running
+the following command.
+
+      kiss a | grep ^shinit | kiss a -
+
+NOTE: If swapping from busybox init on a 
+      running system, shutdown/reboot by 
+      invoking 'busybox poweroff'. shinit's 
+      poweroff/reboot utilities can't be of
+      use until it is actually running.
+
+EOF

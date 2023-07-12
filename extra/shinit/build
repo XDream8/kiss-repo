@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+install -Dm755 shinit   "$1/usr/bin/shinit"
+install -Dm755 poweroff "$1/usr/bin/poweroff"
+
+ln -s shinit   "$1/usr/bin/init"
+ln -s poweroff "$1/usr/bin/reboot"
+
+install -Dm644 shinit-launch-services.boot "$1/etc/rc.d/shinit-launch-services.boot"
