@@ -2,7 +2,7 @@
 
 go mod tidy
 
-cd $PWD/cmd/shfmt
+cd "$PWD/cmd/shfmt"
 
-go build -ldflags "-X main.version=3.5.1"
+go build
 install -Dm755 shfmt "$1/usr/bin/shfmt"

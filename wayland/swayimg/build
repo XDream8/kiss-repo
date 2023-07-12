@@ -10,8 +10,8 @@ meson setup \
     --prefix=/usr \
     -Djpeg=enabled \
     -Dpng=enabled \
-    -Dwebp=$webp \
-    -Dgif=$giflib \
+    -Dwebp="$webp" \
+    -Dgif="$giflib" \
     . output
 
 ninja -C output

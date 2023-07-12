@@ -1,4 +1,5 @@
 #!/bin/sh -e
+# shellcheck disable=2115
 
 make
 make DESTDIR="$1" PREFIX=/usr install
