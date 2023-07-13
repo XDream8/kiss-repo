@@ -2,13 +2,13 @@
 
 export LDFLAGS="$LDFLAGS -static"
 
-# patch -p1 <f2fs-tools-lz4.patch
-
 autoreconf -fi
+
 ./configure \
     --prefix=/usr \
     --bindir=/usr/bin \
-    --sbindir=/usr/bin
+    --sbindir=/usr/bin \
+    --with-lz4
 
 make
 make DESTDIR="$1" install
