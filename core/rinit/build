@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+cargo build --profile optimized
+
+install -Dm755 "target/optimized/rinit"    "$1/usr/bin/rinit"
+install -Dm755 "target/optimized/poweroff" "$1/usr/bin/poweroff"
+
+ln -s rinit    "$1/usr/bin/init"
+ln -s poweroff "$1/usr/bin/reboot"
+
+install -Dm644 rinit-launch-services.boot "$1/etc/rc.d/rinit-launch-services.boot"
