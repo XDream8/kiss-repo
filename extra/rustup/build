@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+patch -p1 < dont-copy-rustup-bin.patch
+
+cargo build --release --bin rustup-init --no-default-features --features curl-backend,reqwest-backend,reqwest-default-tls,no-self-update
+
+install -Dm755 "target/release/rustup-init" "$1/usr/bin/rustup-init"
+
