@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+autoconf -f
+
+rm -rf zlib png jpeg
+
+./configure \
+    --prefix=/usr \
+    --disable-x11 \
+    --enable-gl \
+    --enable-wayland \
+    --with-optim="$CFLAGS"
+
+make
+make DESTDIR="$1" install
