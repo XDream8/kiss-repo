@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+cargo build --profile optimized
+
+install -Dm755 "target/optimized/rsv" "$1/usr/bin/rsv"
