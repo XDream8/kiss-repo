@@ -6,5 +6,8 @@
 # #    while :; do /sbin/getty /dev/tty${getty} linux ; done &   # ubase getty
 # done
 
-# Uncomment enable runit services
+# Uncomment to enable runit services
 # while :; do /usr/bin/runsvdir -P /var/service ; done &
+
+# Uncomment to enable rsv services
+# while :; do /usr/bin/rsv -d /var/service ; done &
