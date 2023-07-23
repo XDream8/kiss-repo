@@ -1,0 +1,17 @@
+bison make
+cairo
+curl
+expat
+freetype-harfbuzz
+gdk-pixbuf
+glib
+gperf make
+gtk+3
+libjpeg-turbo
+libpng
+libwebp
+linux-headers make
+openssl
+pango
+perl make
+perl-netsurf make
