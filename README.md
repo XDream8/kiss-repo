@@ -5,29 +5,29 @@
 
 ## migrating to libressl
 - force remove openssl
-‘‘‘sh
+```sh
 $ KISS_FORCE=1 kiss r openssl
-‘‘‘
+```
 - build and install libressl
-‘‘‘sh
+```sh
 $ kiss build libressl
-‘‘‘
+```
 - check which packages depends on openssl and rebuild them(kiss-revdepends comes with kiss-utils package. its in my repo)
-‘‘‘sh
+```sh
 $ kiss b $(kiss revdepends openssl | sed -e 's#/.*##g' | tr '\n' ' ')
-‘‘‘
+```
 
 ## migrating to netbsd-curses
 - switch to tty because most probably your terminal may break after we remove ncurses
 - force remove ncurses
-‘‘‘sh
+```sh
 $ KISS_FORCE=1 kiss r ncurses
-‘‘‘
+```
 - build and install netbsd-curses
-‘‘‘sh
+```sh
 $ kiss build netbsd-curses
-‘‘‘
+```
 - check which packages depends on ncurses and rebuild them(kiss-revdepends comes with kiss-utils package. its in my repo)
-‘‘‘sh
+```sh
 $ kiss b $(kiss revdepends ncurses | sed -e 's#/.*##g' | tr '\n' ' ')
-‘‘‘
+```
