@@ -1,3 +1,4 @@
 curl
-openssl
+libressl
+rust make
 xz

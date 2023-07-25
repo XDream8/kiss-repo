@@ -1,0 +1,27 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+
+## fix false positive
+export CFLAGS="$CFLAGS -Wno-error=switch"
+
+meson \
+    --prefix=/usr \
+    --buildtype=release \
+    -Dime=false \
+    -Dterminfo=disabled \
+    . output
+
+ninja -C output
+ninja -C output install
+
+## build terminfo
+sed 's/@default_terminfo@/foot/g' foot.info >foot.info.processed
+tic -x -o foot-terminfo foot.info.processed foot foot-direct
+install -Dm755 "foot-terminfo" "$1/usr/share/terminfo/f/foot"
+
+rm -rf \
+   "$1/usr/share/doc" \
+   "$1/usr/share/zsh" \
+   "$1/usr/share/fish" \
+   "$1/usr/share/bash-completion"

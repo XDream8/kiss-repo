@@ -1,0 +1,31 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --localstatedir=/var \
+    --bindir=/usr/bin \
+    --sbindir=/usr/bin \
+    --libdir=/usr/lib \
+    --enable-libuuid \
+    --enable-libblkid \
+    --enable-fsck \
+    --enable-chfn-chsh \
+    --disable-chfn-chsh-password \
+    --disable-makeinstall-chown \
+    --disable-rpath \
+    --without-udev \
+    --without-python \
+    --without-systemd \
+    --without-ncurses
+
+make
+make DESTDIR="$1" install
+
+# Fix broken --sbindir.
+mv -f "$1/usr/sbin/"* "$1/usr/bin"
+rmdir "$1/usr/sbin"
+
+rm -rf \
+    "$1/usr/share/doc" \
+    "$1/usr/share/bash-completion"
+

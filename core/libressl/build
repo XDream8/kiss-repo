@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc
+
+make
+make DESTDIR="$1" install
+
+## provided by ‘certs‘ package
+rm -rf "$1/etc/ssl/cert.pem"

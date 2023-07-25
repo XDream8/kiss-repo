@@ -12,6 +12,6 @@ libjpeg-turbo
 libpng
 libwebp
 libxml2
-ncurses
+netbsd-curses
 pango
 wayland

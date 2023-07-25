@@ -1,0 +1,3 @@
+automake make
+autoconf make
+netbsd-curses

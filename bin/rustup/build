@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+install -Dm755 "rustup-init" "$1/usr/bin/rustup-init"

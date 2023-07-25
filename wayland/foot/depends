@@ -1,0 +1,11 @@
+fcft
+fontconfig
+libxkbcommon
+meson   make
+netbsd-curses make
+pixman
+pkgconf make
+python  make
+tllist  make
+wayland
+wayland-protocols make

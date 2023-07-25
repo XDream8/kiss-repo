@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+export CFLAGS="$CFLAGS -fPIC"
+
+## build both static and dynamic libs
+make all
+make PREFIX="/usr" install
+
+ln -sf tic "$1/usr/bin/captoinfo"
+ln -sf tic "$1/usr/bin/infotocap"
+

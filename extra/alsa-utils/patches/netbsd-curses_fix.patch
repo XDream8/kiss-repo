@@ -1,0 +1,12 @@
+--- a/alsamixer/bindings.h
++++ b/alsamixer/bindings.h
+@@ -25,6 +25,9 @@
+ #define CMD_GET_ARGUMENT(CMD) \
+ 	((CMD) >> 9)
+ 
++#define MIN_MENU_COMMAND (KEY_MAX + 1)
++#define MAX_MENU_COMMAND (KEY_MAX + 17)
++
+ enum mixer_command {
+ 	// `CMD % 4` should produce the channel mask
+ 	CMD_MIXER_CONTROL_DOWN_LEFT = 1,
