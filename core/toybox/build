@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -static"
+export LDFLAGS="$LDFLAGS -static"
+
+for patch in *".patch"; do
+    patch -p1<"$patch"
+done
+
+scripts/genconfig.sh
+scripts/make.sh
+
+## install toybox
+install -Dm4755 toybox "$1/usr/bin/toybox"
+
+## symlink utils
+for bin in $("$1/usr/bin/toybox"); do
+    ln -sf toybox "$1/usr/bin/$bin"
+done

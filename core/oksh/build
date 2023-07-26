@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+export CFLAGS="$CFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --enable-ksh \
+    --enable-sh \
+    --enable-lto \
+    --no-thanks \
+    --enable-static
+
+make
+make install

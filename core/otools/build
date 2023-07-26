@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+export DESTDIR="$1"
+export CFLAGS="$CFLAGS -static"
+export LDFLAGS="$LDFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --with-system-zlib
+
+## only build doas mandoc and pax
+make doas mandoc pax
+make BIN="doas mandoc pax" MAN="" MD5LINK="" MD5MAN="" install

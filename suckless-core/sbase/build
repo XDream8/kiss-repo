@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+# getconf, string and tar are provided by other packages
+sed -e '/getconf\\/d' \
+    -e '/strings\\/d' \
+    -e '/tar\\/d' \
+    -e '/sha224sum\\/d' \
+    -e '/sha384sum\\/d' \
+    -e '/sha512-224sum\\/d' \
+    -e '/sha512-256sum\\/d' Makefile > _
+mv -f _ Makefile
+
+make CFLAGS="$CFLAGS -static" sbase-box
+make DESTDIR="$1" PREFIX=/usr sbase-box-install

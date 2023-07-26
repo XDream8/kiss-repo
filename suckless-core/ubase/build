@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+for patch in *".patch"; do
+    patch -p1 <"$patch"
+done
+
+make CFLAGS="$CFLAGS -static" ubase-box
+make DESTDIR="$1" PREFIX=/usr ubase-box-install
+
+# su: setuid
+chmod 4755 "$1/usr/bin/su"
