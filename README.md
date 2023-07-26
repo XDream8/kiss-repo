@@ -31,3 +31,28 @@ $ kiss build netbsd-curses
 ```sh
 $ kiss b $(kiss revdepends ncurses | sed -e 's#/.*##g' | tr '\n' ' ')
 ```
+
+## switching to toybox
+- build and install gnugrep(for grep), mawk(for awk), oksh(for /bin/sh), rinit(for init system, you can use any init system you want), rsv(for service management), mdevd(for device management) and toybox(for coreutils)
+```sh
+$ kiss b gnugrep mawk oksh rinit rsv mdevd toybox
+```
+- switch to toybox utils
+```sh
+$ kiss a | grep ^toybox | kiss a -
+```
+- switch to gnugrep mawk and oksh
+```sh
+$ kiss a | grep ^gnugrep | kiss a -
+$ kiss a | grep ^mawk | kiss a -
+$ kiss a | grep ^oksh | kiss a -
+$ kiss a | grep ^rinit | kiss a -
+```
+- build patched baseinit package from my repo
+```sh
+$ kiss b baseinit
+```
+- remove busybox
+```sh
+$ kiss r busybox
+```
