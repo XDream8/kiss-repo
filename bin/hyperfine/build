@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+install -Dm755 "hyperfine" "$1/usr/bin/hyperfine"
