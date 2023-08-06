@@ -1,8 +1,5 @@
 #!/bin/sh -e
 
-## compilation fails with busybox awk
-#export AWK=/bin/mawk
-
 ./configure \
 	--prefix=/usr \
 	--without-x \
@@ -13,14 +10,15 @@
 	--without-xpm \
 	--without-zlib \
 	--without-libsystemd \
-    --without-rsvg \
+	--without-rsvg \
 	--without-sqlite3 \
 	--with-small-ja-dic \
 	--with-pgtk \
 	--with-modules \
 	--with-gnutls \
 	--with-xml2 \
-	--with-json
+	--with-json \
+	--with-tree-sitter
 
 make
 make install DESTDIR="$1"
