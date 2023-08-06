@@ -2,6 +2,7 @@
 # shellcheck disable=2016,2086
 
 export LDFLAGS="$LDFLAGS -static"
+export CFLAGS="$CFLAGS -static"
 
 patch -p1 <syslinux-sysmacros.patch
 
@@ -32,7 +33,7 @@ patch -p1 <syslinux-sysmacros.patch
 # disable debug and development flags to reduce bootloader size
 truncate -s 0 mk/devel.mk
 
-case "$XBPS_TARGET_MACHINE" in
+case "$(uname -m)" in
 i686*) targets="bios efi32" ;;
 x86_64*) targets="bios efi64" ;;
 esac
