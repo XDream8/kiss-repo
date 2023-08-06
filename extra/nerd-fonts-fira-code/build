@@ -1,5 +1,0 @@
-#!/bin/sh -e
-
-unzip FiraCode.zip
-
-find . -maxdepth 1 -iname "*.ttf" -not -iname "*Windows Compatible.ttf" -exec install -Dm644 {} "$1/usr/share/fonts/TTF/NerdFonts-FiraCode/{}" \;

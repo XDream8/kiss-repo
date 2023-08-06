@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+unzip FiraCode.zip
+
+install *.ttf -Dt "$1/usr/share/fonts/TTF/NerdFonts-FiraCode/"
+rm -f "$1/usr/share/fonts/TTF/NerdFonts-FiraCode/"*"Windows Compatible.ttf"
