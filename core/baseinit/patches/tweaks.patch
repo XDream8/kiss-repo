@@ -34,6 +34,19 @@
  log "Seeding random..."; {
      random_seed load
  }
+
+--- a/lib/init/rc.boot
++++ a/lib/init/rc.boot
+@@ -77,7 +77,7 @@
+ }
+ 
+ log "Setting up loopback..."; {
+-    ip link set up dev lo
++    ip link set lo up
+ }
+ 
+ log "Setting hostname..."; {
+ 
 --- a/lib/init/rc.shutdown
 +++ b/lib/init/rc.shutdown
 @@ -30,8 +30,6 @@
