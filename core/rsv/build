@@ -2,4 +2,4 @@
 
 cargo build --profile optimized
 
-install -Dm755 "target/optimized/rsv" "$1/usr/bin/rsv"
+install -Dm755 "target/optimized/rsvd" "$1/usr/bin/rsvd"

@@ -10,4 +10,4 @@
 # while :; do /usr/bin/runsvdir -P /var/service ; done &
 
 # Uncomment to enable rsv services
-# while :; do /usr/bin/rsv -d /var/service ; done &
+# while :; do /usr/bin/rsvd /var/service ; done &
