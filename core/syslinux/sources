@@ -1,2 +1,6 @@
-https://kernel.org/pub/linux/utils/boot/syslinux/Testing/MAJOR.MINOR/syslinux-6.04-pre1.tar.xz
+https://kernel.org/pub/linux/utils/boot/syslinux/Testing/6.04/syslinux-6.04-pre1.tar.xz
 patches/syslinux-sysmacros.patch
+patches/01-Strip-the-.note.gnu.property-section-for-the-mbr.patch
+patches/02-Force-the-linker-to-put-all-sections-into-a-single-P.patch
+patches/03-GCC-10-compatibility-patch.patch
+patches/04-Inherit-toolchain-vars-from-environment.patch
