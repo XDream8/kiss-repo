@@ -5,9 +5,9 @@ export DESTDIR="$1"
 ## fix false positive
 export CFLAGS="$CFLAGS -Wno-error=switch"
 
-meson \
-    --prefix=/usr \
-    --buildtype=release \
+meson setup \
+    -Dprefix=/usr \
+    -Dbuildtype=release \
     -Dime=false \
     -Dterminfo=disabled \
     . output

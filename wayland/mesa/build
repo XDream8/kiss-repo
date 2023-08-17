@@ -13,11 +13,11 @@ mv -f _ meson.build
 pkg-config --exists libglvnd || glvnd_enabled=false
 
 meson setup \
-	--prefix=/usr \
-	--sysconfdir=/etc \
-	--mandir=/usr/share/man \
-	--localstatedir=/var \
-	--buildtype=release \
+	-Dprefix=/usr \
+	-Dsysconfdir=/etc \
+	-Dmandir=/usr/share/man \
+	-Dlocalstatedir=/var \
+	-Dbuildtype=release \
 	-Dglx-read-only-text=true \
 	-Dplatforms=wayland \
 	-Dglx=disabled \

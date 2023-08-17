@@ -6,8 +6,8 @@ kiss l libwebp >/dev/null 2>/dev/null && webp=enabled || webp=disabled
 kiss l giflib >/dev/null 2>/dev/null && giflib=enabled || giflib=disabled
 
 meson setup \
-    --auto-features=auto \
-    --prefix=/usr \
+    -Dauto-features=auto \
+    -Dprefix=/usr \
     -Djpeg=enabled \
     -Dpng=enabled \
     -Dwebp="$webp" \

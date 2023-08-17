@@ -16,7 +16,7 @@ mv -f _ meson.build
 
 ## configure app
 meson setup \
-	--prefix=/usr \
+	-Dprefix=/usr \
 	-Dman-pages=disabled \
 	. output
 
