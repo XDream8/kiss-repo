@@ -5,3 +5,5 @@ make
 make DESTDIR="$1" PREFIX=/usr install
 
 rm -rf "$1/lib"
+
+chmod u+s "$1/usr/bin/brightnessctl"

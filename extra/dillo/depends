@@ -8,8 +8,8 @@ glib
 gtk+3
 libjpeg-turbo
 libpng
-libressl
 libxkbcommon
 pango
+openssl
 wayland
 zlib

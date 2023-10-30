@@ -3,9 +3,9 @@
 export CFLAGS="$CFLAGS -static"
 export LDFLAGS="$LDFLAGS -static"
 
-for patch in *".patch"; do
-    patch -p1<"$patch"
-done
+# for patch in *".patch"; do
+    # patch -p1<"$patch"
+# done
 
 scripts/genconfig.sh
 scripts/make.sh

@@ -1,6 +1,7 @@
 #!/bin/sh -e
 
 patch -p1 <netbsd-curses_fix.patch
+patch -p1 <nhlt-use-stdint.h-types.patch
 
 ./configure \
     --prefix=/usr \

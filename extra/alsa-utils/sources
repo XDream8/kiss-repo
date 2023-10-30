@@ -1,2 +1,3 @@
 https://www.alsa-project.org/files/pub/utils/alsa-utils-1.2.10.tar.bz2
 patches/netbsd-curses_fix.patch
+patches/nhlt-use-stdint.h-types.patch

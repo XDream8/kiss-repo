@@ -1,8 +1,12 @@
 #!/bin/sh -e
 
 cat <<EOF
+This is a amd only build with x11/wayland support
 
-NOTE: if you have a amdgpu please prefer mesa from the
-main kiss repository.
+NOTE: Mesa + amdgpu requires CHECKPOINT_RESTORE be enabled
+      in your kernel or things will subtly break.
+      See: https://lwn.net/Articles/845448/
+
+      CONFIG_CHECKPOINT_RESTORE=y
 
 EOF

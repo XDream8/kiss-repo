@@ -11,7 +11,7 @@ libjpeg-turbo
 libpng
 libwebp
 linux-headers make
-libressl
+openssl
 pango
 perl make
 perl-netsurf make

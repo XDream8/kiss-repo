@@ -4,10 +4,12 @@ flex  make
 libdrm
 libelf
 linux-headers make
+llvm
 m4 make
 meson make
 pkgconf make
 python-mako make
 wayland
 wayland-protocols make
+libX11 make
 zlib

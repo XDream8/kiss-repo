@@ -1,5 +1,6 @@
 #!/bin/sh -e
 
+echo $PATH
 cargo build --profile optimized
 
 install -Dm755 "target/optimized/rinit"    "$1/usr/bin/rinit"

@@ -16,7 +16,8 @@
     --without-udev \
     --without-python \
     --without-systemd \
-    --without-ncurses
+    --without-ncurses \
+    --disable-more
 
 make
 make DESTDIR="$1" install
