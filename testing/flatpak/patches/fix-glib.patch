@@ -1,0 +1,22 @@
+From 1a5fd13ca5749a6902704d27e1636af75973885d Mon Sep 17 00:00:00 2001
+From: Alice Mikhaylenko <alicem@gnome.org>
+Date: Sun, 21 Jan 2024 15:53:01 +0400
+Subject: [PATCH] dir: Fix glib criticals
+
+---
+ common/flatpak-dir.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/flatpak-dir.c b/common/flatpak-dir.c
+index 5d9ee91ba6..1921993774 100644
+--- a/common/flatpak-dir.c
++++ b/common/flatpak-dir.c
+@@ -11546,7 +11546,7 @@ flatpak_dir_get_unmaintained_extension_dir_if_exists (FlatpakDir   *self,
+   extension_dir = flatpak_dir_get_unmaintained_extension_dir (self, name, arch, branch);
+ 
+   extension_dir_info = g_file_query_info (extension_dir,
+-                                          G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
++                                          G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET "," G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK,
+                                           G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
+                                           cancellable,
+                                           NULL);

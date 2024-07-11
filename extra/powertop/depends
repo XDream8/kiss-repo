@@ -1,0 +1,6 @@
+autoconf-archive    make
+automake            make
+libnl
+libtool             make
+netbsd-curses
+pciutils

@@ -1,0 +1,26 @@
+From 4e07b63cefdaa8b623ce7920e317ed8717d7c089 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Daniel=20Ekl=C3=B6f?= <daniel@ekloef.se>
+Date: Mon, 18 Mar 2024 16:42:45 +0100
+Subject: [PATCH] plugin: workaround gcc bug that triggers a compilation error
+
+GCC thinks str2type() returns NULL when it doesn't.
+
+Closes #350
+---
+ plugin.c     | 3 ++-
+ 1 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/plugin.c b/plugin.c
+index ed7f63c..20dfbbf 100644
+--- a/plugin.c
++++ b/plugin.c
+@@ -126,7 +126,8 @@ type2str(enum plugin_type type)
+     case PLUGIN_DECORATION: return "decoration";
+     }
+ 
+-    return NULL;
++    assert(false && "invalid type");
++    return "";
+ }
+ 
+ static void __attribute__((constructor))

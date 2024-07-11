@@ -59,13 +59,10 @@ done
 ### change modkey
 sed 's/#define MODKEY WLR_MODIFIER_ALT/#define MODKEY WLR_MODIFIER_LOGO/g' config.def.h >_
 mv -f _ config.def.h
-###remove super key from keybindings since modkey is super now
-sed 's/MODKEY|WLR_MODIFIER_LOGO/MODKEY/g' config.def.h >_
-mv -f _ config.def.h
 
 ### if $LAUNCHER variable exists change launcher
 if [ -n "$LAUNCHER" ]; then
-	sed "s/\"bemenu-run\"/\"$LAUNCHER\"/g" config.def.h >_
+	sed "s/\"wmenu-run\"/\"$LAUNCHER\"/g" config.def.h >_
 	mv -f _ config.def.h
 fi
 

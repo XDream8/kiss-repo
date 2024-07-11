@@ -4,7 +4,7 @@ jdk_dir="usr/lib/java/jdk"
 install_dir="$1/$jdk_dir"
 
 mkdir -p "$install_dir"
-cp -rv bin conf jmods lib include "$install_dir"
+cp -rv bin conf lib "$install_dir"
 
 # create the launch scripts
 mkdir -p "$1/usr/bin"

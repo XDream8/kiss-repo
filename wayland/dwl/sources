@@ -1,7 +1,2 @@
-git+https://github.com/djpohly/dwl
-patches/01-alwayscenter.patch
-patches/02-movestack.patch
-patches/03-pertag.patch
-patches/04-sticky.patch
-patches/05-genericgaps.patch
-patches/06-autostart.patch
+https://codeberg.org/dwl/dwl/archive/9825c26cdd5dfed34022b77a8936c5d8f485e134.tar.gz
+patches/01-autostart.patch

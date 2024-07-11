@@ -12,4 +12,5 @@ python-mako make
 wayland
 wayland-protocols make
 libX11 make
+libXrandr make
 zlib

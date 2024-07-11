@@ -1,5 +1,19 @@
 #!/bin/sh -e
 
+# If `makeinfo` isn't available, fake it.
+if ! command -v makeinfo; then
+	cat <<EOF >"$PWD/makeinfo"
+#!/bin/sh
+echo "texi2any (GNU texinfo) 9.99.9"
+true
+EOF
+	chmod +x "$PWD/makeinfo"
+fi
+export PATH="$PWD:$PATH"
+
+# Enable '-no-pie' as it can fix a seg fault in `temacs`.
+export CFLAGS="$CFLAGS -no-pie"
+
 ./configure \
 	--prefix=/usr \
 	--without-x \
@@ -12,7 +26,6 @@
 	--without-libsystemd \
 	--without-rsvg \
 	--without-sqlite3 \
-	--with-small-ja-dic \
 	--with-pgtk \
 	--with-modules \
 	--with-gnutls \

@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+(
+  cd gvproxy
+  make gvproxy
+  cd ..
+)
+
+install -Dm755 podman-remote-static-linux_amd64 "$1/usr/bin/podman"
+install -Dm755 gvproxy/bin/gvproxy "$1/usr/libexec/podman/gvproxy"
