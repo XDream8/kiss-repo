@@ -4,10 +4,6 @@ export DESTDIR="$1"
 
 :>doc/meson.build
 
-for patch in *".patch"; do
-    patch -p1<"$patch"
-done
-
 meson setup \
     -Dprefix=/usr \
     -Dbuildtype=release \
