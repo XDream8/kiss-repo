@@ -16,8 +16,6 @@ export CFLAGS="$CFLAGS -no-pie"
 
 ./configure \
 	--prefix=/usr \
-	--without-x \
-	--without-xft \
 	--without-dbus \
 	--without-gconf \
 	--without-gsettings \
