@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+unzip *-bin.zip
+
+cd gradle-*/
+rm bin/*.bat
+
+{
+  gradledir="$1/usr/lib/java/gradle"
+
+  install -Dm755 "bin/gradle" "$gradledir/bin/gradle"
+
+  ## gradle symlink
+  mkdir -p "$1/usr/bin"
+  ln -sf "/usr/lib/java/gradle/bin/gradle" "$1/usr/bin/gradle"
+
+  cp -r lib "$gradledir/lib"
+}
