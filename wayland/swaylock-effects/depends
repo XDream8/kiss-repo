@@ -1,0 +1,10 @@
+cairo
+flex make
+gdk-pixbuf
+glib
+libxkbcommon
+meson make
+pkgconf make
+samurai make
+wayland
+wayland-protocols make
